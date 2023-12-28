@@ -8,16 +8,16 @@ const app = express();
 
 app.use(bodyParser.json());
 
-let autoGenNum = Math.random().toString(36).substring(2,6);
+// let autoGenNum = Math.random().toString(36).substring(2,6);
 
 let myTodoArray = [
     {   
-        id: autoGenNum,
+        id: Math.random().toString(36).substring(2,6),
         title: "First todo",
         description: "this is just the first to do in the description"
     },
     {
-        id: autoGenNum,
+        id: Math.random().toString(36).substring(2,6),
         title: "2nd Todo",
         description: "This is the 2nd todo in the list"
     },
@@ -50,5 +50,7 @@ app.get("/todos/:id", (req, res) => {
         });
     }
 })
+
+
 
 app.listen(3000);
