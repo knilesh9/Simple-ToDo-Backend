@@ -18,13 +18,13 @@ let myTodoArray = [
     },
     {
         id: Math.random().toString(36).substring(2,6),
-        title: "2nd Todo",
+        title: "3nd Todo",
         description: "This is the 2nd todo in the list"
     },
     {
         id: "here23",
         title: "2nd Todo",
-        description: "This is the 2nd todo in the list"
+        description: "This is the 3nd todo in the list"
     }
 
 
@@ -51,6 +51,18 @@ app.get("/todos/:id", (req, res) => {
     }
 })
 
+app.post("/todos", (req, res) => {
+
+    //Object destructuring was necessary.
+    let {title, description} = req.body;
+    let id = Math.random().toString(36).substring(2, 6);
+    myTodoArray.push({id, title, description});
+    /*  else the code was long without destructuring 
+        since id.title will only contain variable
+        you would need to use title: id.title, this is long.(avoid)
+    */
+    res.status(201).send(myTodoArray);
+})
 
 
 app.listen(3000);
