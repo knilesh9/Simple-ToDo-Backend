@@ -14,20 +14,21 @@ let myTodoArray = [
     {   
         id: Math.random().toString(36).substring(2,6),
         title: "First todo",
-        description: "this is just the first to do in the description"
+        description: "this is just the first to do in the description",
+        completed: false
     },
     {
         id: Math.random().toString(36).substring(2,6),
         title: "3nd Todo",
-        description: "This is the 2nd todo in the list"
+        description: "This is the 2nd todo in the list",
+        completed: false
     },
     {
         id: "here23",
         title: "2nd Todo",
-        description: "This is the 3nd todo in the list"
+        description: "This is the 3rd todo in the list",
+        completed: false
     }
-
-
 ];
 
 app.get("/todos", (req, res) => {
@@ -54,14 +55,18 @@ app.get("/todos/:id", (req, res) => {
 app.post("/todos", (req, res) => {
 
     //Object destructuring was necessary.
-    let {title, description} = req.body;
+    let {title, description, completed} = req.body;
     let id = Math.random().toString(36).substring(2, 6);
-    myTodoArray.push({id, title, description});
+    myTodoArray.push({id, title, description, completed});
     /*  else the code was long without destructuring 
         since id.title will only contain variable
         you would need to use title: id.title, this is long.(avoid)
     */
-    res.status(201).send(myTodoArray);
+
+    //sending JSON arranges the items.
+    res.status(201).json({
+        myTodoArray
+    });
 })
 
 
